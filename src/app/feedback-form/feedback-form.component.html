@@ -1,0 +1,123 @@
+<form novalidate [formGroup]="feedbackForm">
+    <section class="customer-name">
+      <h1>Full Name</h1>
+      <input type="text" placeholder="Enter your name here" formControlName="customerName">
+    </section>
+    <section class="gender">
+      <h1>Gender</h1>
+      <ul>
+        <li>
+          <input id="genderMale" type="radio" value="Male" formControlName="gender" >
+          <label for="genderMale">Male</label>
+        </li>
+        <li>
+          <input id="genderFemale" type="radio"  value="Female" formControlName="gender">
+          <label for="genderFemale">Female</label>
+        </li>
+      </ul>
+    </section>
+    <section class="product-purchased" >
+      <h1>Product purchased</h1>
+      <label>I own a:</label>
+      <select formControlName="productPurchased">
+        <option value=""></option>
+        <option value="Refrigerator">Refrigerator</option>
+        <option value="Washing Machine">Washing Machine</option>
+        <option value="Telivision">Telivision</option>
+        <option value="Old Washing Machine">Old Washing Machine</option>
+      </select>
+    </section>
+    <section class="detailed-feedback">
+      <h1>Detailed Feedback </h1>
+      <section>
+        <h1>Product quality</h1>
+        <ul>
+          <li>
+            <input id="productQualityAwesome" formControlName="ProductQuality" type="radio" value="Awesome">
+            <label for="productQualityAwesome">Awesome</label>
+          </li>
+          <li>
+            <input id="productQualityGood"formControlName="ProductQuality" type="radio" value="Good">
+            <label for="productQualityGood">Good</label>
+          </li>
+          <li>
+            <input id="productQualityWorst" formControlName="ProductQuality" type="radio" value="Worst">
+            <label for="productQualityWorst">Worst</label>
+          </li>
+        </ul>
+      </section>
+      <section formGroupName="delivery">
+        <h1>Delivery</h1>
+        <ul>
+          <li>
+            <input id="delOnTime" type="checkbox" formControlName="delOnTime">
+            <label for="delOnTime">On time?</label>
+          </li>
+          <li>
+            <input id="damagedProduct" type="checkbox" formControlName="damagedProduct">
+            <label for="damagedProduct">Damaged product?</label>
+          </li>
+          <li>
+            <input id="extraCharge" type="checkbox" formControlName="extraCharge">
+            <label for="extraCharge">Extra charge?</label>
+          </li>
+        </ul>
+      </section>
+      <section formGroupName="installation">
+        <h1>Installation</h1>
+        <ul>
+          <li>
+            <input id="properInstallation" type="checkbox" formControlName="properInstallation">
+            <label for="properInstallation">Proper installation?</label>
+          </li>
+          <li>
+            <input id="easyUserManual" type="checkbox" formControlName="easyUserManual">
+            <label for="easyUserManual">Easy user manual?</label>
+          </li>
+          <li>
+            <input id="properTraining" type="checkbox" formControlName="properTraining">
+            <label for="properTraining">Proper training?</label>
+          </li>
+        </ul>
+      </section>
+      <section formGroupName="Maintenance">
+        <h1>Maintenance</h1>
+        <ul>
+          <li>
+            <input id="periodicMaintenance" type="checkbox" formControlName="periodicMaintenance">
+            <label for="periodicMaintenance">Periodic Maintenance?</label>
+          </li>
+          <li>
+            <input id="issuesFixed" type="checkbox" formControlName="issuesFixed">
+            <label for="issuesFixed">Issues Fixed?</label>
+          </li>
+          <li>
+            <input id="frequentIssues" type="checkbox" formControlName=" frequentIssues">
+            <label for="frequentIssues">Frequent issues?</label>
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <h1>Any Suggestions?</h1>
+      <textarea formControlName="suggestions"></textarea>
+    </section>
+    <section class="more-feedbacks" formArrayName="moreFeedbacks">
+      <h1>More feedback?</h1>
+      <ul>
+        <li *ngFor="let item of morefeedbacksControls.controls; let i = index">
+          <input type="text" formControlName={{i}}>
+          <button type="button" title="Delete Feedback"(click)="deleteMoreFeedback(i)">Delete</button>
+        </li>
+      </ul>
+      <button type="button"(click)="addMoreFeedback()">Add a Feedback</button>
+    </section>
+    <button type="submit">Submit Feedback</button>
+    <button type="button">Clear Form</button>
+  </form>
+
+  <section>
+    <hr>
+    <h1>Developers area</h1>
+  <pre>{{ feedbackForm.value | json}}</pre>
+  </section>
